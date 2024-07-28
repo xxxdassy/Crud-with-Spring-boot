@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -30,5 +31,10 @@ public class UserController {
         }
 
         return ResponseEntity.ok(user.get());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> listUsers() {
+        return ResponseEntity.ok(this.userService.getUsers());
     }
 }
