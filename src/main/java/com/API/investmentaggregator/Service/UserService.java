@@ -40,4 +40,12 @@ public class UserService {
     public List<User> getUsers() {
         return this.userRepository.findAll();
     }
+
+    public void deleteUserById(String userId) {
+        var id = UUID.fromString(userId);
+        var userExists = this.userRepository.existsById(id);
+        if(userExists) {
+            this.userRepository.deleteById(id);
+        }
+    }
 }
