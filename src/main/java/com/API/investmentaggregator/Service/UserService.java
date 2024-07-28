@@ -6,6 +6,7 @@ import com.API.investmentaggregator.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,5 +30,9 @@ public class UserService {
         var userSaved = this.userRepository.save(entity);
 
         return  userSaved.getUserId();
+    }
+
+    public Optional<User> getUserById(String userId) {
+        return this.userRepository.findById(UUID.fromString(userId));
     }
 }

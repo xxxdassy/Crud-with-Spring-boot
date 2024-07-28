@@ -19,11 +19,16 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
         var userId = userService.createUser(createUserDto);
-        return ResponseEntity.created(URI.create("/v1/users" + userId.toString())).build();
+        return ResponseEntity.created(URI.create("/v1/users/" + userId.toString())).build();
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId) {
-        return  null;
+        var user = this.userService.getUserById(userId);
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(user.get());
     }
 }
